@@ -23,7 +23,7 @@ public class Main {
     }
 
     public static int menuPrincipal(AlunoServiceImpl alunoService, ProfessorServiceImpl professorService) {
-        String[] menu = {"Alunos", "Professores", "Situação de aluno", "Salario do Professor", "Sair"};
+        String[] menu = {"Alunos", "Professores", "Situação de aluno", "Salário do Professor", "Sair"};
         String message = "Menu Principal Sistema \n" +
                 "Alunos: " + alunoService.getTotalItems() + "\n" +
                 "Professores: " + professorService.getTotalItems() + "\n";

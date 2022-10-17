@@ -25,7 +25,7 @@ public class RepositoryProfessorImpl implements IRepository {
         professores.remove(p);
     }
 
-    public ArrayList<Professor> getProfessors() {
+    public ArrayList<Professor> getProfessores() {
         return professores;
     }
 

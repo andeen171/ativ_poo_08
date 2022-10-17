@@ -10,12 +10,23 @@ import java.util.ArrayList;
 public class ProfessorServiceImpl implements IService {
     private final RepositoryProfessorImpl repositoryProfessor = new RepositoryProfessorImpl();
 
-    public Professor getProfessor(String cpf) {
-        return repositoryProfessor.getProfessor(cpf);
+    public void getProfessor() {
+        String cpf = JOptionPane.showInputDialog(null, "Cpf do professor");
+        Professor professor = repositoryProfessor.getProfessor(cpf);
+        if (professor != null) {
+            JOptionPane.showMessageDialog(null, professor.toString());
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Professor não encontrado");
     }
 
-    public ArrayList<Professor> getProfessores() {
-        return repositoryProfessor.getProfessors();
+    public void getProfessores() {
+        String result = "";
+        ArrayList<Professor> professores = repositoryProfessor.getProfessores();
+        for(Professor professor: professores) {
+            result += professor.toString() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, result);
     }
 
     @Override
