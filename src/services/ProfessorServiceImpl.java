@@ -10,32 +10,35 @@ import java.util.ArrayList;
 public class ProfessorServiceImpl implements IService {
     private final RepositoryProfessorImpl repositoryProfessor = new RepositoryProfessorImpl();
 
-    public void getProfessor() {
+    public Professor getProfessor() {
         String cpf = JOptionPane.showInputDialog(null, "Cpf do professor");
-        Professor professor = repositoryProfessor.getProfessor(cpf);
-        if (professor != null) {
-            JOptionPane.showMessageDialog(null, professor.toString());
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Professor não encontrado");
+        return repositoryProfessor.getProfessor(cpf);
     }
 
-    public void getProfessores() {
-        String result = "";
-        ArrayList<Professor> professores = repositoryProfessor.getProfessores();
-        for(Professor professor: professores) {
-            result += professor.toString() + "\n";
-        }
-        JOptionPane.showMessageDialog(null, result);
+    public ArrayList<Professor> getProfessores() {
+        return repositoryProfessor.getProfessores();
+        
     }
 
     @Override
     public void add() {
         JTextField nome = new JTextField();
         JTextField cpf = new JTextField();
-        JTextField codigo = new JTextField();
-        Professor professor = new Professor(Integer.parseInt(codigo.getText()), cpf.getText(), nome.getText(), 2800);
-        repositoryProfessor.addProfessor(professor);
+        JTextField salario = new JTextField();
+        Object[] menu = new Object[] {
+            "Nome", nome,
+            "Cpf", cpf,
+            "Salário", salario
+        };
+        if(JOptionPane.showConfirmDialog(null, menu, "Cadastrar professor", JOptionPane.YES_NO_CANCEL_OPTION) == 0) {
+            double salarioValue = Double.parseDouble(salario.getText());
+            if (salarioValue < 0) {
+                JOptionPane.showMessageDialog(null, "Salário não pode ser maior que zero!");
+                return;
+            }
+            Professor professor = new Professor(repositoryProfessor.getIdSequencia(), cpf.getText(), nome.getText(), salarioValue);
+            repositoryProfessor.addProfessor(professor);
+        }
     }
 
     @Override

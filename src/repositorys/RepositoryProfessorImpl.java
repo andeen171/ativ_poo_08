@@ -31,7 +31,7 @@ public class RepositoryProfessorImpl implements IRepository {
 
     @Override
     public int getIdSequencia() {
-        return professores.size() - 1;
+        return professores.size() + 1;
     }
 
     @Override

@@ -1,6 +1,8 @@
 package controllers;
 
 import services.ProfessorServiceImpl;
+import java.util.ArrayList;
+import models.Professor;
 
 import javax.swing.*;
 
@@ -16,8 +18,22 @@ public class ControllerProfessor {
             switch(option) {
                 case 0 -> service.add();
                 case 1 -> service.remove();
-                case 2 -> service.getProfessores();
-                case 3 -> service.getProfessor();
+                case 2 -> {
+                    ArrayList<Professor> professores = service.getProfessores();
+                    String result = "";
+                    for(Professor professor: professores) {
+                        result += professor.toString() + "\n";
+                    }
+                    JOptionPane.showMessageDialog(null, result);
+                }
+                case 3 -> {
+                    Professor professor = service.getProfessor();
+                    if (professor != null) {
+                        JOptionPane.showMessageDialog(null, professor.toString());
+                        return;
+                    }
+                    JOptionPane.showMessageDialog(null, "Professor não encontrado");
+                }
                 default -> controleLoop = false;
             }
         } while(controleLoop);

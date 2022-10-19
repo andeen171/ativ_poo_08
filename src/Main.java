@@ -17,6 +17,20 @@ public class Main {
             switch(menuPrincipal(alunoService, professorService)) {
                 case 0 -> alunoController.menu(alunoService);
                 case 1 -> professorController.menu(professorService);
+                case 2 -> {
+                    double nota = alunoService.getAluno().getNota();
+                    if (nota < 40) {
+                        JOptionPane.showMessageDialog(null, "Aluno reprovado");
+                    } else if(nota < 60) {
+                        JOptionPane.showMessageDialog(null, "Aluno em recuperação");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Aluno aprovado");
+                    }
+                }
+                case 3 -> {
+                    double salario = (professorService.getProfessor().getSalario()) * (1 + ((professorService.getTotalItems() * 3) / 100));
+                    JOptionPane.showMessageDialog(null, salario);
+                }
                 default -> menuLoop = false;
             }
         } while(menuLoop);

@@ -2,6 +2,10 @@ package controllers;
 
 import services.AlunoServiceImpl;
 
+import java.util.ArrayList;
+
+import models.Aluno;
+
 import javax.swing.*;
 
 public class ControllerAluno {
@@ -16,8 +20,23 @@ public class ControllerAluno {
             switch(option) {
                 case 0 -> service.add();
                 case 1 -> service.remove();
-                case 2 -> service.getAlunos();
-                case 3 -> service.getAluno();
+                case 2 -> {
+                    
+                    ArrayList<Aluno> alunos = service.getAlunos();
+                    String result = "";
+                    for(Aluno aluno : alunos) {
+                        result += aluno.toString() + "\n";
+                    }
+                    JOptionPane.showMessageDialog(null, result);
+                }
+                case 3 -> {
+                    Aluno aluno = service.getAluno();
+                    if (aluno != null) {
+                        JOptionPane.showMessageDialog(null, aluno.toString());
+                        return;
+                    }
+                    JOptionPane.showMessageDialog(null, "Aluno não encontrado");
+                }
                 default -> controleLoop = false;
             }
         } while(controleLoop);
